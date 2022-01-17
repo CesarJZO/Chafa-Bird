@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PipesMovement : MonoBehaviour
 {
-    public float speed = 5;
-    public float duration = 7;
+    [SerializeField] float speed = 5;
+    Rigidbody2D body;
+    void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
-        Destroy(gameObject, duration);
+        body.velocity = Vector2.left * speed;
     }
-    void Update()
+    void LateUpdate()
     {
-        if (!BirdController.Hit) {
-            Debug.Log("Ouch!");
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
+        if (BirdController.Hit)
+            body.velocity = Vector2.zero;
     }
 
 }

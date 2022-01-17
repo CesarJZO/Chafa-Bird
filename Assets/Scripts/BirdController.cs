@@ -3,7 +3,8 @@ using UnityEngine;
 public class BirdController : MonoBehaviour
 {
     public static bool Hit { get; private set; } = false;
-    public float peakForce = 8;
+    [SerializeField] float peakForce = 8;
+    [SerializeField] float dieStrength = 5;
     public ScoreSystem score;
     float strength;
     Rigidbody2D rb;
@@ -32,9 +33,16 @@ public class BirdController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        score.ResetScore();
+        if (!Hit)
+            Die();
         Hit = true;
     }
 
-
+    void Die()
+    {
+        score.ResetScore();
+        rb.constraints = RigidbodyConstraints2D.None;
+        float x = Random.Range(-1, 1);
+        rb.AddForce(new Vector2(x, 1) * dieStrength, ForceMode2D.Impulse);
+    }
 }
