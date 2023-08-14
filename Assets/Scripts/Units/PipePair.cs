@@ -7,7 +7,6 @@ namespace Units
     public sealed class PipePair : MonoBehaviour
     {
         [SerializeField] private float speed;
-        [SerializeField] private float lifeTime;
 
         private Rigidbody2D _rigidbody;
 
@@ -26,7 +25,6 @@ namespace Units
         private void Start()
         {
             _rigidbody.velocity = Vector2.left * speed;
-            Destroy(gameObject, lifeTime);
         }
 
         private void OnBirdDie()

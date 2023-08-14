@@ -25,7 +25,7 @@ namespace UI
 
         private void OnPipePassed(uint currentScore)
         {
-            scoreText.text = currentScore.ToString("D2");
+            scoreText.text = currentScore.ToString();
         }
     }
 }
