@@ -8,6 +8,8 @@ namespace UI
     {
         [SerializeField] private Text scoreText;
 
+        public uint CurrentScore { get; private set; }
+
         private void Awake()
         {
             ScoreTrigger.OnPipePassed += OnPipePassed;
@@ -25,7 +27,15 @@ namespace UI
 
         private void OnPipePassed(uint currentScore)
         {
+            CurrentScore = currentScore;
             scoreText.text = currentScore.ToString();
+        }
+
+        public void ResetScore()
+        {
+            CurrentScore = 0;
+            scoreText.text = CurrentScore.ToString();
+            ScoreTrigger.ResetScore();
         }
     }
 }

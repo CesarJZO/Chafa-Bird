@@ -17,5 +17,10 @@ namespace Units
             if (other.CompareTag(birdTag))
                 OnPipePassed?.Invoke(++_currentScore);
         }
+
+        public static void ResetScore()
+        {
+            _currentScore = 0;
+        }
     }
 }
