@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d112432cc2a457392fe6c081c406ce5, type: 3}
+  m_Name: PlayerAudioMedia
+  m_EditorClassIdentifier: 
+  jump: {fileID: 8300000, guid: 5cb806f078e86c442a40c604c290fade, type: 3}
+  death: {fileID: 8300000, guid: f7de1e9cf26b9334c9ca536d3f8f3748, type: 3}
+  shoot: {fileID: 8300000, guid: f7de1e9cf26b9334c9ca536d3f8f3748, type: 3}
+  land: {fileID: 8300000, guid: f7de1e9cf26b9334c9ca536d3f8f3748, type: 3}

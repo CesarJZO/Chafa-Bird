@@ -16,7 +16,8 @@ public class BirdController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Jump"))
+        // todo: use InputSystem
+        // if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Jump"))
         {
             float y = rb.velocity.y;
             // strength = peakForce * Mathf.Exp((y * -y) / 50);

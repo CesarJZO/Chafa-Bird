@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ac144667284a0d8f11cdcab2b85dce, type: 3}
+  m_Name: PlayerAnimationsMedia
+  m_EditorClassIdentifier: 
+  idle: {fileID: 7400000, guid: 66c6c7c4f83f6084dbe11d39588f8b8f, type: 2}
+  jump: {fileID: 7400000, guid: cb6b2e93b5a68504eb2ddf2270b96e80, type: 2}
+  land: {fileID: 7400000, guid: d8819436d3ce4dc40b16b26fe0754a99, type: 2}
+  die: {fileID: 7400000, guid: 1e87e9d99ef697345ab783594798211b, type: 2}
