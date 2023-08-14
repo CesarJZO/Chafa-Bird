@@ -10,12 +10,12 @@ namespace Units
 
         [SerializeField, Tag] private string birdTag;
 
-        private uint _currentScore;
+        private static uint _currentScore;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag(birdTag))
-                OnPipePassed?.Invoke(_currentScore);
+                OnPipePassed?.Invoke(++_currentScore);
         }
     }
 }

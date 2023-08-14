@@ -3,16 +3,15 @@ using UnityEngine;
 
 namespace Units
 {
-    [RequireComponent(typeof(MeshRenderer))]
     public sealed class GroundScroller : MonoBehaviour
     {
         [SerializeField] private float speed;
 
-        private MeshRenderer _meshRenderer;
+        private MeshRenderer[] _meshRenderers;
 
         private void Awake()
         {
-            _meshRenderer = GetComponent<MeshRenderer>();
+            _meshRenderers = GetComponentsInChildren<MeshRenderer>();
 
             Bird.OnDie += OnBirdDie;
         }
@@ -29,7 +28,8 @@ namespace Units
 
         private void Update()
         {
-            _meshRenderer.material.mainTextureOffset = Vector2.right * (Time.time * speed);
+            foreach (MeshRenderer r in _meshRenderers)
+                r.material.mainTextureOffset = Vector2.right * (Time.time * speed);
         }
     }
 }
