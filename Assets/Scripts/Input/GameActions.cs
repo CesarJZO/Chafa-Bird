@@ -722,31 +722,13 @@ namespace Input
             ]
         },
         {
-            ""name"": ""Ground"",
+            ""name"": ""Bird"",
             ""id"": ""45393ecb-afe4-49ed-9269-f2337782eb02"",
             ""actions"": [
                 {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""01b50ed7-53e2-493c-9ff6-5e6c68e89828"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""fde01039-a43c-4d38-a14c-67420fb2d3db"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Shoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""f4685aef-6a1e-4f2e-aa52-1388e6401d5b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -777,112 +759,13 @@ namespace Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
-                    ""id"": ""218d4855-dbc6-41b4-8b05-ad63128d36d9"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""4ca7d728-0c4e-41dc-9ce7-c6a9b3a58ad1"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""af61792a-6f1a-4e8c-8a23-500ed8b63f15"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""6a2f4cc7-dc5f-47e8-b98d-d59097f2580c"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0c86922d-6dab-481c-82b2-7b0b3a289b99"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
-                    ""id"": ""0a87a988-d495-4d57-8654-a2bb585287dd"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fd6108c6-2aac-4757-9bd8-d8b6dd00f114"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f740745c-fd46-4ee1-ba15-f7c1ea3bcdad"",
+                    ""id"": ""2270af41-f94a-423e-bd27-131d40330a43"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""968bcd7b-e3ed-4369-88c8-8cd6323d1fe1"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""03757c78-b686-4ded-89ae-9044753b2ed4"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Shoot"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -935,11 +818,9 @@ namespace Input
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-            // Ground
-            m_Ground = asset.FindActionMap("Ground", throwIfNotFound: true);
-            m_Ground_Jump = m_Ground.FindAction("Jump", throwIfNotFound: true);
-            m_Ground_Move = m_Ground.FindAction("Move", throwIfNotFound: true);
-            m_Ground_Shoot = m_Ground.FindAction("Shoot", throwIfNotFound: true);
+            // Bird
+            m_Bird = asset.FindActionMap("Bird", throwIfNotFound: true);
+            m_Bird_Jump = m_Bird.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1170,67 +1051,51 @@ namespace Input
         }
         public UIActions @UI => new UIActions(this);
 
-        // Ground
-        private readonly InputActionMap m_Ground;
-        private List<IGroundActions> m_GroundActionsCallbackInterfaces = new List<IGroundActions>();
-        private readonly InputAction m_Ground_Jump;
-        private readonly InputAction m_Ground_Move;
-        private readonly InputAction m_Ground_Shoot;
-        public struct GroundActions
+        // Bird
+        private readonly InputActionMap m_Bird;
+        private List<IBirdActions> m_BirdActionsCallbackInterfaces = new List<IBirdActions>();
+        private readonly InputAction m_Bird_Jump;
+        public struct BirdActions
         {
             private @GameActions m_Wrapper;
-            public GroundActions(@GameActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Jump => m_Wrapper.m_Ground_Jump;
-            public InputAction @Move => m_Wrapper.m_Ground_Move;
-            public InputAction @Shoot => m_Wrapper.m_Ground_Shoot;
-            public InputActionMap Get() { return m_Wrapper.m_Ground; }
+            public BirdActions(@GameActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Jump => m_Wrapper.m_Bird_Jump;
+            public InputActionMap Get() { return m_Wrapper.m_Bird; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(GroundActions set) { return set.Get(); }
-            public void AddCallbacks(IGroundActions instance)
+            public static implicit operator InputActionMap(BirdActions set) { return set.Get(); }
+            public void AddCallbacks(IBirdActions instance)
             {
-                if (instance == null || m_Wrapper.m_GroundActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_GroundActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_BirdActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_BirdActionsCallbackInterfaces.Add(instance);
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
             }
 
-            private void UnregisterCallbacks(IGroundActions instance)
+            private void UnregisterCallbacks(IBirdActions instance)
             {
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
-                @Move.started -= instance.OnMove;
-                @Move.performed -= instance.OnMove;
-                @Move.canceled -= instance.OnMove;
-                @Shoot.started -= instance.OnShoot;
-                @Shoot.performed -= instance.OnShoot;
-                @Shoot.canceled -= instance.OnShoot;
             }
 
-            public void RemoveCallbacks(IGroundActions instance)
+            public void RemoveCallbacks(IBirdActions instance)
             {
-                if (m_Wrapper.m_GroundActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_BirdActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IGroundActions instance)
+            public void SetCallbacks(IBirdActions instance)
             {
-                foreach (var item in m_Wrapper.m_GroundActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_BirdActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_GroundActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_BirdActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public GroundActions @Ground => new GroundActions(this);
+        public BirdActions @Bird => new BirdActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -1267,11 +1132,9 @@ namespace Input
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         }
-        public interface IGroundActions
+        public interface IBirdActions
         {
             void OnJump(InputAction.CallbackContext context);
-            void OnMove(InputAction.CallbackContext context);
-            void OnShoot(InputAction.CallbackContext context);
         }
     }
 }

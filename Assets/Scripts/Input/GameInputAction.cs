@@ -4,8 +4,6 @@
     {
         None,
         Jump,
-        Move,
-        Shoot,
         Skip,
         Navigate,
         Submit,
