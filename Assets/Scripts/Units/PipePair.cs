@@ -14,12 +14,12 @@ namespace Units
         {
             _rigidbody = GetComponent<Rigidbody2D>();
 
-            Bird.OnDie += OnBirdDie;
+            Bird.Died += OnBirdDie;
         }
 
         private void OnDestroy()
         {
-            Bird.OnDie -= OnBirdDie;
+            Bird.Died -= OnBirdDie;
         }
 
         private void Start()

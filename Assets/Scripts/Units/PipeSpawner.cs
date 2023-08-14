@@ -11,12 +11,12 @@ namespace Units
 
         private void Awake()
         {
-            Bird.OnDie += OnBirdDie;
+            Bird.Died += OnBirdDie;
         }
 
         private void OnDestroy()
         {
-            Bird.OnDie -= OnBirdDie;
+            Bird.Died -= OnBirdDie;
         }
 
         private void OnBirdDie()

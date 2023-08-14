@@ -26,14 +26,14 @@ namespace UI
             });
             exitButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
 
-            Bird.OnDie += OnBirdDie;
+            Bird.Died += OnBirdDie;
 
             gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            Bird.OnDie -= OnBirdDie;
+            Bird.Died -= OnBirdDie;
         }
 
         private void OnBirdDie()

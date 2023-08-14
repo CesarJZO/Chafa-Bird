@@ -1,5 +1,6 @@
 ﻿using Input;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -8,10 +9,12 @@ namespace Player
     [RequireComponent(typeof(Collider2D))]
     public sealed class Bird : MonoBehaviour
     {
-        public static event System.Action OnDie;
+        public static event System.Action Died;
 
         [SerializeField] private float peakForce;
         [SerializeField] private float dieStrength;
+
+        [SerializeField] private UnityEvent onDie;
 
         private Rigidbody2D _rigidbody;
         private bool _death;
@@ -48,7 +51,8 @@ namespace Player
             float direction = Mathf.Sign(Random.Range(-1f, 1f));
             _rigidbody.AddForce(new Vector2(direction, 1f) * dieStrength, ForceMode2D.Impulse);
 
-            OnDie?.Invoke();
+            Died?.Invoke();
+            onDie?.Invoke();
         }
     }
 }

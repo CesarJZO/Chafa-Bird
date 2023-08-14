@@ -13,12 +13,12 @@ namespace Units
         {
             _meshRenderers = GetComponentsInChildren<MeshRenderer>();
 
-            Bird.OnDie += OnBirdDie;
+            Bird.Died += OnBirdDie;
         }
 
         private void OnDestroy()
         {
-            Bird.OnDie -= OnBirdDie;
+            Bird.Died -= OnBirdDie;
         }
 
         private void OnBirdDie()
