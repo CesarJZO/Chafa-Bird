@@ -1,12 +1,12 @@
-﻿using Units;
+﻿using TMPro;
+using Units;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
     public sealed class ScoreUI : MonoBehaviour
     {
-        [SerializeField] private Text scoreText;
+        [SerializeField] private TextMeshProUGUI scoreText;
 
         public uint CurrentScore { get; private set; }
 
