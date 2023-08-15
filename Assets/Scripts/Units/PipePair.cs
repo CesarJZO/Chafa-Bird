@@ -1,4 +1,6 @@
-﻿using Player;
+﻿using System;
+using Player;
+using Settings;
 using UnityEngine;
 
 namespace Units
@@ -7,6 +9,9 @@ namespace Units
     public sealed class PipePair : MonoBehaviour
     {
         [SerializeField] private float speed;
+        [SerializeField] private SpriteRenderer topSpriteRenderer;
+        [SerializeField] private SpriteRenderer bottomSpriteRenderer;
+        [SerializeField] private PipeSprites pipeSprites;
 
         private Rigidbody2D _rigidbody;
 
@@ -30,6 +35,20 @@ namespace Units
         private void OnBirdDie()
         {
             _rigidbody.velocity = Vector2.zero;
+        }
+
+        public void SetColor(PipeColor pipeColor)
+        {
+            try
+            {
+                Sprite pipeSprite = pipeSprites.GetSprite(pipeColor);
+                topSpriteRenderer.sprite = pipeSprite;
+                bottomSpriteRenderer.sprite = pipeSprite;
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("Something is null in PipePair.", this);
+            }
         }
     }
 }

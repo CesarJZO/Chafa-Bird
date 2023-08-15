@@ -1,10 +1,13 @@
 ﻿using Player;
+using Settings;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Units
 {
     public sealed class PipeSpawner : MonoBehaviour
     {
+        [SerializeField] private PipeColor pipeColor;
         [SerializeField] private PipePair pipePair;
         [SerializeField] private float spawnRate;
         [SerializeField] private float heightOffsetRange;
@@ -32,7 +35,12 @@ namespace Units
         private void SpawnPipe()
         {
             float heightOffset = Random.Range(-heightOffsetRange, heightOffsetRange);
-            Instantiate(pipePair, transform.position + Vector3.up * heightOffset, Quaternion.identity);
+            PipePair instance = Instantiate(
+                pipePair,
+                transform.position + Vector3.up * heightOffset,
+                Quaternion.identity
+            );
+            instance.SetColor(pipeColor);
         }
     }
 }

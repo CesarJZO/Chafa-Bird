@@ -36,6 +36,8 @@ namespace Player
 
         private void OnJumpInput(InputAction.CallbackContext context)
         {
+            if (_death) return;
+
             if (!context.performed) return;
 
             float strength = peakForce - _rigidbody.velocity.y;
