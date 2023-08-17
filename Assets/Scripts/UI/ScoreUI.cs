@@ -1,5 +1,5 @@
-﻿using TMPro;
-using Units;
+﻿using Management;
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -8,34 +8,37 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI scoreText;
 
-        public uint CurrentScore { get; private set; }
-
-        private void Awake()
-        {
-            ScoreTrigger.OnPipePassed += OnPipePassed;
-        }
-
         private void Start()
         {
-            OnPipePassed(0);
+            if (!ScoreManager.Instance)
+            {
+                Debug.LogWarning("ScoreManager was not found!", this);
+                return;
+            }
+
+            ScoreManager.Instance.OnScoreUpdated += OnScoreUpdated;
+
+            OnScoreUpdated(0);
         }
 
         private void OnDestroy()
         {
-            ScoreTrigger.OnPipePassed -= OnPipePassed;
+            ScoreManager.Instance.OnScoreUpdated -= OnScoreUpdated;
         }
 
-        private void OnPipePassed(uint currentScore)
+        private void OnScoreUpdated(uint currentScore)
         {
-            CurrentScore = currentScore;
             scoreText.text = currentScore.ToString();
         }
 
-        public void ResetScore()
+        public void Show()
         {
-            CurrentScore = 0;
-            scoreText.text = CurrentScore.ToString();
-            ScoreTrigger.ResetScore();
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

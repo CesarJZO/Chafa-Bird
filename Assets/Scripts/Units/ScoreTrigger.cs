@@ -1,26 +1,27 @@
-﻿using System;
-using Attributes;
+﻿using Attributes;
+using Management;
 using UnityEngine;
 
 namespace Units
 {
     public class ScoreTrigger : MonoBehaviour
     {
-        public static event Action<uint> OnPipePassed;
-
         [SerializeField, Tag] private string birdTag;
 
-        private static uint _currentScore;
+        private ScoreManager _scoreManager;
+
+        private void Start()
+        {
+            _scoreManager = ScoreManager.Instance;
+
+            if (!_scoreManager)
+                Debug.LogWarning("ScoreManager was not found!", this);
+        }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag(birdTag))
-                OnPipePassed?.Invoke(++_currentScore);
-        }
-
-        public static void ResetScore()
-        {
-            _currentScore = 0;
+                _scoreManager.IncrementScore();
         }
     }
 }

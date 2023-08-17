@@ -8,27 +8,37 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(CanvasGroup))]
     public sealed class GameOverUI : MonoBehaviour
     {
+        [Header("Settings")]
+        [SerializeField, Min(0f)] private float showDelay;
+        [SerializeField] private float bestIncrementSpeed;
+
+        [Header("Dependencies")]
         [SerializeField] private ScoreUI scorePanel;
         [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private float incrementSpeed;
         [SerializeField] private TextMeshProUGUI bestText;
         [SerializeField] private Button replayButton;
         [SerializeField] private Button exitButton;
 
+        private ScoreManager _scoreManager;
+        private CanvasGroup _canvasGroup;
+
         private void Start()
         {
-            replayButton.onClick.AddListener(() =>
-            {
-                scorePanel.ResetScore();
-                SceneManager.LoadScene(GameScene.Game);
-            });
+            replayButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.Game));
             exitButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
 
             Bird.Died += OnBirdDie;
 
-            gameObject.SetActive(false);
+            _scoreManager = ScoreManager.Instance;
+            if (!_scoreManager)
+                Debug.LogWarning("ScoreManager was not found!", this);
+
+            _canvasGroup = GetComponent<CanvasGroup>();
+
+            Hide();
         }
 
         private void OnDestroy()
@@ -38,15 +48,16 @@ namespace UI
 
         private void OnBirdDie()
         {
-            bestText.text = scorePanel.CurrentScore.ToString();
-            scorePanel.gameObject.SetActive(false);
-            gameObject.SetActive(true);
-            StartCoroutine(IncrementToScore());
+            _scoreManager.SaveBestScore();
+            bestText.text = _scoreManager.BestScore.ToString();
+
+            scorePanel.Hide();
+            Show();
         }
 
         private IEnumerator IncrementToScore()
         {
-            uint maxScore = scorePanel.CurrentScore;
+            uint maxScore = _scoreManager.CurrentScore;
             uint currentScore = maxScore switch
             {
                 > 15 => maxScore - 10,
@@ -57,8 +68,31 @@ namespace UI
             {
                 currentScore++;
                 scoreText.text = currentScore.ToString();
-                yield return new WaitForSeconds(incrementSpeed);
+                yield return new WaitForSeconds(bestIncrementSpeed);
             }
+        }
+
+        private IEnumerator ShowAfterDelay()
+        {
+            yield return new WaitForSeconds(showDelay);
+
+            _canvasGroup.alpha = 1f;
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
+
+            StartCoroutine(IncrementToScore());
+        }
+
+        public void Show()
+        {
+            StartCoroutine(ShowAfterDelay());
+        }
+
+        public void Hide()
+        {
+            _canvasGroup.alpha = 0f;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
     }
 }
