@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8349308416492097399}
   - component: {fileID: 2305635559986837687}
   - component: {fileID: 2902662788521939732}
+  - component: {fileID: 2126212339295289109}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7938d7061e4ba48fd7063f27f52075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabledInStates: 10
+  enabledInStates: 2
 --- !u!114 &2305635559986837687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,4 +73,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc60d8054654929a71247c17925f488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabledInStates: 20
+  enabledInStates: 12
+--- !u!114 &2126212339295289109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635287335384168040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b434e46b68cc4a108ce0b004280e300f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseVisibleOnStates: 12
+  allowVisibleOnClick: 0
+  timeVisible: 0
+  visibleOnControllerScheme: 0

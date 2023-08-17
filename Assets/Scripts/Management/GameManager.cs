@@ -14,11 +14,10 @@ namespace Management
         [SerializeField] private GameState initialState;
         [SerializeField, ReadOnly] private GameState currentState;
 
-        [SerializeField] private UnityEvent onSceneIntroState;
+        [SerializeField] private UnityEvent onTutorialState;
         [SerializeField] private UnityEvent onPlayingState;
         [SerializeField] private UnityEvent onPausedState;
-        [SerializeField] private UnityEvent onSceneOutroState;
-        [SerializeField] private UnityEvent onCutsceneState;
+        [SerializeField] private UnityEvent onGameOverState;
 
         public static GameManager Instance { get; private set; }
 
@@ -27,12 +26,7 @@ namespace Management
             set
             {
                 if (value == currentState) return;
-                // If value has multiple flags, return
-                if (value != 0 && (value & (value - 1)) != 0)
-                {
-                    Debug.LogWarning("Cannot set multiple states at once.", this);
-                    return;
-                }
+                if (!IsValid(value)) return;
                 currentState = value;
                 StateChanged?.Invoke(currentState);
             }
@@ -41,8 +35,16 @@ namespace Management
 
         private void OnValidate()
         {
-            if ((initialState & (initialState - 1)) != 0)
-                Debug.LogWarning("Cannot set multiple states at once.", this);
+            IsValid(initialState);
+        }
+
+        private bool IsValid(GameState state)
+        {
+            // Is valid when state is a power of two. Meaning only one bit is set.
+            if ((state & (state - 1)) == 0) return true;
+
+            Debug.LogWarning("Cannot set multiple states at once.", this);
+            return false;
         }
 
         private void Awake()
@@ -60,11 +62,10 @@ namespace Management
         {
             switch (state)
             {
-                case GameState.SceneIntro: onSceneIntroState?.Invoke(); break;
+                case GameState.Tutorial: onTutorialState?.Invoke(); break;
                 case GameState.Playing: onPlayingState?.Invoke(); break;
                 case GameState.Paused: onPausedState?.Invoke(); break;
-                case GameState.SceneOutro: onSceneOutroState?.Invoke(); break;
-                case GameState.Cutscene: onCutsceneState?.Invoke(); break;
+                case GameState.GameOver: onGameOverState?.Invoke(); break;
             }
         }
 
