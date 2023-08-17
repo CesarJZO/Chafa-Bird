@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System;
+using Core;
 using Input;
 using Management;
 using UnityEngine;
@@ -6,8 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace UI
 {
-    public sealed class TogglePanelUI : MonoBehaviour
+    public sealed class TogglePanelUI : PanelUI
     {
+        public override event Action OnShow;
+        public override event Action OnHide;
+
         [SerializeField] private bool startHidden;
         [SerializeField] private GameState allowedStates;
         [SerializeField] private GameInputAction showOnInput;
@@ -49,14 +53,16 @@ namespace UI
             Show();
         }
 
-        public void Show()
+        public override void Show()
         {
             gameObject.SetActive(true);
+            OnShow?.Invoke();
         }
 
-        public void Hide()
+        public override void Hide()
         {
             gameObject.SetActive(false);
+            OnHide?.Invoke();
         }
 
         private void Update()

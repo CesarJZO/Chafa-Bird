@@ -1,12 +1,17 @@
-﻿using Core;
+﻿using System;
+using Core;
 using Management;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public sealed class PauseUI : MonoBehaviour
+    public sealed class PauseUI : PanelUI
     {
+        public override event Action OnShow;
+        public override event Action OnHide;
+        public override event Action<Button> OnButtonClick;
+
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button exitToTitleButton;
 
@@ -14,13 +19,21 @@ namespace UI
         {
             if (resumeButton)
             {
-                resumeButton.onClick.AddListener(PauseManager.Instance.Resume);
+                resumeButton.onClick.AddListener(() =>
+                {
+                    PauseManager.Instance.Resume();
+                    OnButtonClick?.Invoke(resumeButton);
+                });
                 UIManager.CurrentSelectedObject = resumeButton.gameObject;
             }
 
             if (exitToTitleButton)
             {
-                exitToTitleButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
+                exitToTitleButton.onClick.AddListener(() =>
+                {
+                    SceneManager.LoadScene(GameScene.MainMenu);
+                    OnButtonClick?.Invoke(exitToTitleButton);
+                });
             }
 
             PauseManager.Paused += OnPause;
@@ -31,20 +44,32 @@ namespace UI
 
         private void OnPause()
         {
-            gameObject.SetActive(true);
+            Show();
             if (resumeButton)
                 UIManager.CurrentSelectedObject = resumeButton.gameObject;
         }
 
         private void OnResume()
         {
-            gameObject.SetActive(false);
+            Hide();
         }
 
         private void OnDestroy()
         {
             PauseManager.Paused -= OnPause;
             PauseManager.Resumed -= OnResume;
+        }
+
+        public override void Show()
+        {
+            gameObject.SetActive(true);
+            OnShow?.Invoke();
+        }
+
+        public override void Hide()
+        {
+            gameObject.SetActive(false);
+            OnHide?.Invoke();
         }
     }
 }

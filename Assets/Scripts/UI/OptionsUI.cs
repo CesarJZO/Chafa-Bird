@@ -1,12 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace UI
 {
-    public sealed class OptionsUI : MonoBehaviour
+    public sealed class OptionsUI : PanelUI
     {
-        public void Show()
+        public override event Action OnShow;
+        public override event Action OnHide;
+
+        public override void Show()
         {
             gameObject.SetActive(true);
+            OnShow?.Invoke();
+        }
+
+        public override void Hide()
+        {
+            gameObject.SetActive(false);
+            OnHide?.Invoke();
         }
     }
 }

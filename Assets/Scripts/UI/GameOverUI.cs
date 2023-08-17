@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Core;
 using Management;
 using Player;
@@ -9,8 +10,12 @@ using UnityEngine.UI;
 namespace UI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public sealed class GameOverUI : MonoBehaviour
+    public sealed class GameOverUI : PanelUI
     {
+        public override event Action OnShow;
+        public override event Action OnHide;
+        public override event Action<Button> OnButtonClick;
+
         [Header("Settings")]
         [SerializeField, Min(0f)] private float showDelay;
         [SerializeField] private float bestIncrementSpeed;
@@ -27,8 +32,16 @@ namespace UI
 
         private void Start()
         {
-            replayButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.Game));
-            exitButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
+            replayButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(GameScene.Game);
+                OnButtonClick?.Invoke(replayButton);
+            });
+            exitButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(GameScene.MainMenu);
+                OnButtonClick?.Invoke(exitButton);
+            });
 
             Bird.Died += OnBirdDie;
 
@@ -81,18 +94,20 @@ namespace UI
             _canvasGroup.blocksRaycasts = true;
 
             StartCoroutine(IncrementToScore());
+            OnShow?.Invoke();
         }
 
-        public void Show()
+        public override void Show()
         {
             StartCoroutine(ShowAfterDelay());
         }
 
-        public void Hide()
+        public override void Hide()
         {
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            OnHide?.Invoke();
         }
     }
 }
