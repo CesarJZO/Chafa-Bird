@@ -9,6 +9,7 @@ namespace Player
     [RequireComponent(typeof(Collider2D))]
     public sealed class Bird : MonoBehaviour
     {
+        public static event System.Action Jumped;
         public static event System.Action Died;
 
         [SerializeField] private float peakForce;
@@ -42,6 +43,8 @@ namespace Player
 
             float strength = peakForce - _rigidbody.velocity.y;
             _rigidbody.AddForce(Vector2.up * strength, ForceMode2D.Impulse);
+
+            Jumped?.Invoke();
         }
 
         private void OnCollisionEnter2D()

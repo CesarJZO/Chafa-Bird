@@ -1,6 +1,5 @@
 ﻿using System;
 using Attributes;
-using Core;
 using UnityEngine;
 
 namespace Management
