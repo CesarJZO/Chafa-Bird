@@ -31,6 +31,7 @@ namespace Management
 
         private void OnDestroy()
         {
+            Time.timeScale = 1f;
             PauseInput.PausePerformed -= OnPausePerformed;
         }
 

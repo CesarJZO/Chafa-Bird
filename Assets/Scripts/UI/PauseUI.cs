@@ -8,9 +8,7 @@ namespace UI
     public sealed class PauseUI : MonoBehaviour
     {
         [SerializeField] private Button resumeButton;
-        [SerializeField] private Button optionsButton;
         [SerializeField] private Button exitToTitleButton;
-        [SerializeField] private Button quitButton;
 
         private void Start()
         {
@@ -19,16 +17,11 @@ namespace UI
                 resumeButton.onClick.AddListener(PauseManager.Instance.Resume);
                 UIManager.CurrentSelectedObject = resumeButton.gameObject;
             }
-            if (optionsButton)
-                optionsButton.onClick.AddListener(() => Debug.Log("Options"));
+
             if (exitToTitleButton)
-                exitToTitleButton.onClick.AddListener(() =>
-                {
-                    PauseManager.Instance.Resume();
-                    SceneManager.LoadScene(GameScene.MainMenu);
-                });
-            if (quitButton)
-                quitButton.onClick.AddListener(Application.Quit);
+            {
+                exitToTitleButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
+            }
 
             PauseManager.Paused += OnPause;
             PauseManager.Resumed += OnResume;
