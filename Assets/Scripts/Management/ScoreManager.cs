@@ -6,6 +6,7 @@ namespace Management
 {
     public sealed class ScoreManager : MonoBehaviour
     {
+        private const string BestScoreKey = "BestScore";
         public event Action<uint> OnScoreUpdated;
         public static ScoreManager Instance { get; private set; }
 
@@ -19,7 +20,7 @@ namespace Management
         {
             Instance = this;
 
-            bestScore = (uint)PlayerPrefs.GetInt("BestScore");
+            bestScore = (uint)PlayerPrefs.GetInt(BestScoreKey);
         }
 
         private void Start()
@@ -31,15 +32,18 @@ namespace Management
         public void IncrementScore(uint amount = 1)
         {
             score += amount;
+
+            if (score > bestScore)
+                SaveBestScore();
+
             OnScoreUpdated?.Invoke(score);
         }
 
-        public void SaveBestScore()
+        private void SaveBestScore()
         {
-            if (score > bestScore)
-                bestScore = score;
+            bestScore = score;
 
-            PlayerPrefs.SetInt("BestScore", (int)bestScore);
+            PlayerPrefs.SetInt(BestScoreKey, (int)bestScore);
         }
     }
 }

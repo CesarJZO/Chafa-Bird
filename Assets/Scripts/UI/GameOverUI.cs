@@ -60,7 +60,6 @@ namespace UI
 
         private void OnBirdDie()
         {
-            _scoreManager.SaveBestScore();
             bestText.text = _scoreManager.BestScore.ToString();
 
             scorePanel.Hide();
