@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 602b0b6897774bebbe44a1726203ac97, type: 3}
-  m_Name: Pipe Colors
+  m_Name: PipeColors
   m_EditorClassIdentifier: 
   green: {fileID: -1761289891, guid: 628c0456c4e3445489371c9f6f4562f3, type: 3}
   red: {fileID: -1339610713, guid: 628c0456c4e3445489371c9f6f4562f3, type: 3}

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Audio;
 using Core;
 using Management;
 using Player;
@@ -25,20 +26,31 @@ namespace UI
         private ScoreManager _scoreManager;
         private CanvasGroup _canvasGroup;
 
+        private UIAudioManager _audioManager;
+
         private void Start()
         {
-            replayButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.Game));
-            exitButton.onClick.AddListener(() => SceneManager.LoadScene(GameScene.MainMenu));
+            _canvasGroup = GetComponent<CanvasGroup>();
+            Hide();
+
+            _audioManager = UIAudioManager.Instance;
+
+            replayButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(GameScene.Game);
+                if (_audioManager) _audioManager.PlaySelect();
+            });
+            exitButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(GameScene.MainMenu);
+                if (_audioManager) _audioManager.PlaySelect();
+            });
 
             Bird.Died += OnBirdDie;
 
             _scoreManager = ScoreManager.Instance;
             if (!_scoreManager)
                 Debug.LogWarning("ScoreManager was not found!", this);
-
-            _canvasGroup = GetComponent<CanvasGroup>();
-
-            Hide();
         }
 
         private void OnDestroy()
@@ -79,6 +91,7 @@ namespace UI
             _canvasGroup.alpha = 1f;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
+            if (_audioManager) _audioManager.PlayShow();
 
             StartCoroutine(IncrementToScore());
         }
@@ -93,6 +106,7 @@ namespace UI
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            if (_audioManager) _audioManager.PlayHide();
         }
     }
 }

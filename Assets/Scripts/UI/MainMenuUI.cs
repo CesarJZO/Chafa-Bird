@@ -1,5 +1,5 @@
-﻿using Core;
-using Input;
+﻿using Audio;
+using Core;
 using Management;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,14 +15,29 @@ namespace UI
         [SerializeField] private Button optionsButton;
         [SerializeField] private Button quitButton;
 
+        private UIAudioManager _audioManager;
+
         private void Start()
         {
+            _audioManager = UIAudioManager.Instance;
             if (playButton)
-                playButton.onClick.AddListener(() => SceneManager.LoadScene(sceneOnPlay));
+                playButton.onClick.AddListener(() =>
+                {
+                    SceneManager.LoadScene(sceneOnPlay);
+                    if (_audioManager) _audioManager.PlaySubmitAlt();
+                });
             if (optionsPanel && optionsButton)
-                optionsButton.onClick.AddListener(optionsPanel.Show);
+                optionsButton.onClick.AddListener(() =>
+                {
+                    optionsPanel.Show();
+                    if (_audioManager) _audioManager.PlaySelect();
+                });
             if (quitButton)
-                quitButton.onClick.AddListener(Application.Quit);
+                quitButton.onClick.AddListener(() =>
+                {
+                    Application.Quit();
+                    if (_audioManager) _audioManager.PlaySelect();
+                });
 
             UIManager.CurrentSelectedObject = playButton.gameObject;
         }
