@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Retro Gaming
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -524028171
   material: {fileID: 2594555612440430426}
-  materialHashCode: 0
+  materialHashCode: 1257581109
   m_Version: 1.1.0
   m_SourceFontFileGUID: a4c9b071283fd50419bd55aa2e7bd96e
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a4c9b071283fd50419bd55aa2e7bd96e, type: 3}
